@@ -11,35 +11,40 @@
 #define VOARRAY(_name, _type) \
 	typedef struct { \
 		_type *i; \
-		VOARRAY_TYPE_SIZE length; \
+		VOARRAY_TYPE_SIZE size; \
 	} _name;
 
 #define VOARRAY_INIT(_type, _var, _errRet) \
-	if (_var.length) { \
+	if (_var.size) { \
 		_var.i = (_type *)VOARRAY_MALLOC( \
-			sizeof(_type[_var.length]) \
+			sizeof(_type[_var.size]) \
 		); \
 		if (_var.i == NULL) { \
 			return _errRet; \
 		} \
 	}
 
-#define VOARRAY_RESIZE(_type, _var, _errRet) \
-	if (_var.length) { \
-		_var.i = (_type *)VOARRAY_REALLOC( \
-			(void *)_var.i, \
-			sizeof(_type[_var.length]) \
-		); \
+#define VOARRAY_RESIZE_RAWSIZE(_type, _var, _errRet, _size) \
+	if (_var.size) { \
+		_var.i = (_type *)VOARRAY_REALLOC((void *)_var.i, _size); \
 		if (_var.i == NULL) { \
 			return _errRet; \
 		} \
 	} \
+
+#define VOARRAY_RESIZE(_type, _var, _errRet) \
+	VOARRAY_RESIZE_RAWSIZE( \
+		_type, \
+		_var, \
+		_errRet, \
+		sizeof(_type[_var.size]) \
+	)
 
 #define VOARRAY_UNINIT(_var) \
 	if (_var.i != NULL) { \
 		VOARRAY_FREE(_var.i); \
 		_var.i = NULL; \
 	} \
-	_var.length = 0;
+	_var.size = 0;
 
 #endif

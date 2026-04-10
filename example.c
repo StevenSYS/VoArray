@@ -9,10 +9,10 @@ int main() {
 	VOARRAY_TYPE_SIZE i;
 	intDA_t intArray;
 	
-	intArray.length = 3;
+	intArray.size = 3;
 	VOARRAY_INIT(int, intArray, 1);
 	
-	for (i = 0; i < intArray.length; i++) {
+	for (i = 0; i < intArray.size; i++) {
 		intArray.i[i] = (i + 1) * 5;
 		printf("%i\n", intArray.i[i]);
 	}
