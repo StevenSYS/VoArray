@@ -14,15 +14,21 @@
 		VOARRAY_TYPE_SIZE size; \
 	} _name;
 
-#define VOARRAY_INIT(_type, _var, _errRet) \
+#define VOARRAY_INITRAW(_type, _var, _errRet, _size) \
 	if (_var.size) { \
-		_var.i = (_type *)VOARRAY_MALLOC( \
-			sizeof(_type[_var.size]) \
-		); \
+		_var.i = (_type *)VOARRAY_MALLOC(_size); \
 		if (_var.i == NULL) { \
 			return _errRet; \
 		} \
 	}
+
+#define VOARRAY_INIT(_type, _var, _errRet) \
+	VOARRAY_INITRAW( \
+		_type, \
+		_var, \
+		_errRet, \
+		sizeof(_type[_var.size]) \
+	)
 
 #define VOARRAY_RESIZE_RAWSIZE(_type, _var, _errRet, _size) \
 	if (_var.size) { \
