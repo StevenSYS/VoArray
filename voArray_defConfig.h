@@ -1,10 +1,12 @@
 /*
 	If you're using VoArray in a project and
-	you need to change one or more of these macros, then
+	you need to change one or more of these macros,
 	copy this file to your project's include directory,
 	modify the macros, and rename the new file to "voArray_config.h".
 	
 	You can also remove this comment if you want.
+	
+	If you want to use this file define a macro called "VOARRAY_DEFCONFIG".
 */
 #include <stdlib.h>
 
