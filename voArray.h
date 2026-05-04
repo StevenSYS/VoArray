@@ -47,7 +47,6 @@
 		sizeof(_type[_var.size]) \
 	)
 
-
 #define VOARRAY_RESIZE(_type, _var, _errRet) \
 	VOARRAY_RESIZE_RAWSIZE( \
 		_type, \
