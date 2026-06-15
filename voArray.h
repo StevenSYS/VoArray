@@ -36,7 +36,7 @@
 		if (_var.i == NULL) { \
 			return _errRet; \
 		} \
-	} \
+	}
 
 /* Variable Size */
 #define VOARRAY_INIT(_type, _var, _errRet) \
