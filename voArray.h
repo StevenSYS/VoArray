@@ -23,36 +23,36 @@
 
 /* Raw Size */
 #define VOARRAY_INIT_RAWSIZE(_type, _var, _errRet, _size) \
-	if (_var.size) { \
-		_var.i = (_type *)VOARRAY_MALLOC(_size); \
-		if (_var.i == NULL) { \
-			return _errRet; \
-		} \
+	_var.i = (_type *)VOARRAY_MALLOC(_size); \
+	if (_var.i == NULL) { \
+		return _errRet; \
 	}
 
 #define VOARRAY_RESIZE_RAWSIZE(_type, _var, _errRet, _size) \
-	if (_var.size) { \
-		_var.i = (_type *)VOARRAY_REALLOC((void *)_var.i, _size); \
-		if (_var.i == NULL) { \
-			return _errRet; \
-		} \
+	_var.i = (_type *)VOARRAY_REALLOC((void *)_var.i, _size); \
+	if (_var.i == NULL) { \
+		return _errRet; \
 	}
 
 /* Variable Size */
 #define VOARRAY_INIT(_type, _var, _errRet) \
-	VOARRAY_INIT_RAWSIZE( \
-		_type, \
-		_var, \
-		_errRet, \
-		sizeof(_type[_var.size]) \
-	)
+	if (_var.size) { \
+		VOARRAY_INIT_RAWSIZE( \
+			_type, \
+			_var, \
+			_errRet, \
+			sizeof(_type[_var.size]) \
+		); \
+	}
 
 #define VOARRAY_RESIZE(_type, _var, _errRet) \
-	VOARRAY_RESIZE_RAWSIZE( \
-		_type, \
-		_var, \
-		_errRet, \
-		sizeof(_type[_var.size]) \
-	)
+	if (_var.size) { \
+		VOARRAY_RESIZE_RAWSIZE( \
+			_type, \
+			_var, \
+			_errRet, \
+			sizeof(_type[_var.size]) \
+		); \
+	}
 
 #endif
