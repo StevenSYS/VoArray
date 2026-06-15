@@ -6,7 +6,7 @@
 	
 	You can also remove this comment if you want.
 	
-	If you want to use this file define a macro called "VOARRAY_DEFCONFIG".
+	If you want to use this file, define a macro called "VOARRAY_DEFCONFIG".
 */
 #include <stdlib.h>
 
