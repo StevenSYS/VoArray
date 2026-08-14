@@ -8,11 +8,18 @@
 #endif
 
 /* Macros */
-#define VOARRAY(_name, _type) \
-	typedef struct { \
+
+/* These two can be used to make a private VoArray type. */
+#define VOARRAY_ST(_name, _type) \
+	struct _name { \
 		_type *i; \
 		VOARRAY_TYPE_SIZE size; \
-	} _name;
+	}
+
+#define VOARRAY_SNAME(_name, _sName, _type) typedef VOARRAY_ST(_sName, _type) _name
+
+/* This is the one you will probably want to use. */
+#define VOARRAY(_name, _type) VOARRAY_SNAME(_name, , _type)
 
 #define VOARRAY_UNINIT(_var) \
 	if (_var.i != NULL) { \
